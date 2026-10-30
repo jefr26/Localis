@@ -61,3 +61,10 @@ fastlane/Preview.html
 fastlane/screenshots/**/*.png
 fastlane/test_output
 Localis.app
+
+# Local build output and signing
+.swiftpm/
+*.zip
+*.zip.sha256
+*.provisionprofile
+.DS_Store
