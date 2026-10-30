@@ -1,6 +1,7 @@
 import Foundation
 import FoundationModels
 import Observation
+import Security
 
 struct AttachedFile {
     let url: URL
@@ -27,9 +28,30 @@ final class ModelService {
     var fileMode: FileMode = .auto
     /// Se incrementa cada vez que el panel se muestra, para devolver el foco al campo.
     var focusRequest = 0
+    /// Preferencia del usuario: usar Private Cloud Compute cuando esté disponible.
+    var usePCC = UserDefaults.standard.bool(forKey: "usePCC") {
+        didSet { UserDefaults.standard.set(usePCC, forKey: "usePCC") }
+    }
 
     private var task: Task<Void, Never>?
     private let model = SystemLanguageModel.default
+    /// Modelo de Private Cloud Compute (macOS 27 o posterior). Se guarda sin tipo
+    /// porque una propiedad almacenada no puede depender de la versión del sistema.
+    private let pccStorage: AnyObject? = {
+        if #available(macOS 27.0, *) { return PrivateCloudComputeLanguageModel() }
+        return nil
+    }()
+    /// Si la generación en curso usa PCC. Se fija al enviar para no mezclar modelos.
+    private var runOnCloud = false
+    /// PCC exige el entitlement restringido com.apple.developer.private-cloud-compute,
+    /// que solo vale si la app se firma con un perfil de aprovisionamiento. Sin él,
+    /// el sistema informa PCC como disponible pero rechaza cada petición.
+    private static let hasPCCEntitlement: Bool = {
+        guard let task = SecTaskCreateFromSelf(nil) else { return false }
+        let value = SecTaskCopyValueForEntitlement(
+            task, "com.apple.developer.private-cloud-compute" as CFString, nil)
+        return (value as? Bool) == true
+    }()
 
     /// Partes que se procesan a la vez. Si ves errores o no mejora el tiempo, ponlo en 1.
     private static let parallelism = 2
@@ -38,39 +60,114 @@ final class ModelService {
     /// Máximo de tokens de fragmentos que se envían al modelo en modo búsqueda.
     private static let retrievalTokens = 3500
 
-    private let instructions = """
-        Eres Localis, un asistente que corre localmente en el Mac del usuario. \
-        Responde en el mismo idioma del usuario, de forma clara y breve.
-        """
-    private let defaultTask = "Haz un resumen claro y breve del contenido."
+    // Los textos para el modelo se traducen como la interfaz: así la petición, las
+    // instrucciones y la respuesta quedan en el mismo idioma.
+    private let instructions = String(
+        localized: "prompt.instructions",
+        defaultValue: "Eres Localis, un asistente en el Mac del usuario. Responde en el idioma en que está escrita la petición del usuario, de forma clara y breve.")
+    private let defaultTask = String(
+        localized: "prompt.defaultTask",
+        defaultValue: "Haz un resumen claro y breve del contenido.")
 
     // MARK: - Disponibilidad
 
     /// nil si el modelo está listo; si no, un mensaje para mostrar al usuario.
     var availabilityMessage: String? {
+        if usingPCC { return nil }
         switch model.availability {
         case .available:
             return nil
         case .unavailable(let reason):
             switch reason {
             case .deviceNotEligible:
-                return "Este Mac no es compatible con Apple Intelligence."
+                return String(localized: "Este Mac no es compatible con Apple Intelligence.")
             case .appleIntelligenceNotEnabled:
-                return "Activa Apple Intelligence en Ajustes del Sistema."
+                return String(localized: "Activa Apple Intelligence en Ajustes del Sistema.")
             case .modelNotReady:
-                return "El modelo aún se está descargando. Inténtalo en unos minutos."
+                return String(localized: "El modelo aún se está descargando. Inténtalo en unos minutos.")
             default:
-                return "El modelo no está disponible."
+                return String(localized: "El modelo no está disponible.")
             }
         }
     }
 
+    // MARK: - Private Cloud Compute
+
+    @available(macOS 27.0, *)
+    private var pcc: PrivateCloudComputeLanguageModel? {
+        pccStorage as? PrivateCloudComputeLanguageModel
+    }
+
+    /// true si esta copia de la app está firmada con el permiso de PCC.
+    var pccEntitled: Bool { Self.hasPCCEntitlement }
+
+    /// true si PCC se puede usar ahora mismo (sistema compatible y cuota disponible).
+    var pccAvailable: Bool {
+        if #available(macOS 27.0, *), let pcc, Self.hasPCCEntitlement {
+            return pcc.isAvailable && !pcc.quotaUsage.isLimitReached
+        }
+        return false
+    }
+
+    /// true si la próxima consulta irá a PCC.
+    var usingPCC: Bool { usePCC && pccAvailable }
+
+    /// Texto de ayuda del botón de PCC, con el motivo si no está disponible.
+    var pccHelp: String {
+        guard #available(macOS 27.0, *), let pcc else {
+            return String(localized: "Private Cloud Compute requiere macOS 27 o posterior.")
+        }
+        guard Self.hasPCCEntitlement else {
+            return String(localized: "Esta copia de Localis no tiene el permiso de Private Cloud Compute. Compílala firmada con tu cuenta de desarrollador (ver build_app.sh).")
+        }
+        if case .unavailable(let reason) = pcc.availability {
+            switch reason {
+            case .deviceNotEligible:
+                return String(localized: "Este Mac no es compatible con Private Cloud Compute.")
+            case .systemNotReady:
+                return String(localized: "Private Cloud Compute aún no está listo. Revisa Apple Intelligence en Ajustes del Sistema.")
+            default:
+                return String(localized: "Private Cloud Compute no está disponible.")
+            }
+        }
+        if pcc.quotaUsage.isLimitReached {
+            return quotaMessage(pcc.quotaUsage.resetDate)
+        }
+        return usePCC
+            ? String(localized: "Usando Private Cloud Compute (modelo más grande en servidores de Apple)")
+            : String(localized: "Usar Private Cloud Compute (modelo más grande en servidores de Apple)")
+    }
+
+    private func quotaMessage(_ reset: Date?) -> String {
+        guard let reset else {
+            return String(localized: "Alcanzaste el límite de uso de Private Cloud Compute.")
+        }
+        let date = reset.formatted(date: .abbreviated, time: .shortened)
+        return String(localized: "Alcanzaste el límite de uso de Private Cloud Compute hasta \(date).")
+    }
+
+    /// Sesión nueva (sin historial) con el modelo de la generación en curso.
+    private func makeSession() -> LanguageModelSession {
+        if runOnCloud, #available(macOS 27.0, *), let pcc {
+            return LanguageModelSession(model: pcc, instructions: instructions)
+        }
+        return LanguageModelSession(instructions: instructions)
+    }
+
+    private func contextSize() async throws -> Int {
+        if runOnCloud, #available(macOS 27.0, *), let pcc {
+            return try await pcc.contextSize
+        }
+        return model.contextSize  // disponible desde macOS 26.0
+    }
+
     // MARK: - Conteo de tokens (con comprobación de versión)
 
-    /// Conteo exacto en macOS 26.4 o posterior; en versiones anteriores, una
-    /// estimación conservadora (3 caracteres por token) para no pasarse del contexto.
+    /// Conteo exacto con el modelo local en macOS 26.4 o posterior; en versiones
+    /// anteriores o con PCC (que no ofrece conteo), una estimación conservadora
+    /// (3 caracteres por token) para no pasarse del contexto.
     private func tokens(_ text: String) async throws -> Int {
-        if #available(macOS 26.4, *) {
+        if !runOnCloud, #available(macOS 26.4, *) {
             return try await model.tokenCount(for: text)
         }
         return max(1, Int((Double(text.count) / 3.0).rounded(.up)))
@@ -115,6 +212,7 @@ final class ModelService {
         lastInfo = nil
         status = nil
         isGenerating = true
+        runOnCloud = usingPCC
         let start = Date()
 
         task = Task {
@@ -127,20 +225,14 @@ final class ModelService {
                     try await stream(prompt: userTask)
                 }
                 let secs = String(format: "%.1f s", Date().timeIntervalSince(start))
-                lastInfo = info.isEmpty ? secs : "\(info) · \(secs)"
+                var parts = runOnCloud ? ["PCC"] : []
+                if !info.isEmpty { parts.append(info) }
+                parts.append(secs)
+                lastInfo = parts.joined(separator: " · ")
             } catch is CancellationError {
                 // El usuario pulsó Detener.
-            } catch let error as LanguageModelSession.GenerationError {
-                switch error {
-                case .exceededContextWindowSize:
-                    errorMessage = "El texto es demasiado largo para el modelo (límite de contexto)."
-                case .guardrailViolation:
-                    errorMessage = "El modelo no puede responder a esta petición."
-                default:
-                    errorMessage = error.localizedDescription
-                }
             } catch {
-                errorMessage = error.localizedDescription
+                errorMessage = describe(error)
             }
             status = nil
             isGenerating = false
@@ -149,6 +241,56 @@ final class ModelService {
 
     func stop() {
         task?.cancel()
+    }
+
+    // MARK: - Errores
+
+    /// Mensaje para el usuario. Cubre los errores del modelo local y los de PCC.
+    private func describe(_ error: Error) -> String {
+        if isContextOverflow(error) {
+            return String(localized: "El texto es demasiado largo para el modelo (límite de contexto).")
+        }
+        if isGuardrail(error) {
+            return String(localized: "El modelo no puede responder a esta petición.")
+        }
+        if #available(macOS 27.0, *) {
+            if let error = error as? PrivateCloudComputeLanguageModel.Error {
+                switch error {
+                case .networkFailure:
+                    return String(localized: "No hay conexión con Private Cloud Compute. Revisa tu red o desactiva PCC.")
+                case .quotaLimitReached(let info):
+                    return quotaMessage(info.resetDate)
+                case .serviceUnavailable:
+                    return String(localized: "Private Cloud Compute no está disponible en este momento. Inténtalo más tarde o desactiva PCC.")
+                default:
+                    return error.localizedDescription
+                }
+            }
+            if case LanguageModelError.rateLimited = error {
+                return String(localized: "Demasiadas solicitudes seguidas. Espera un momento e inténtalo de nuevo.")
+            }
+        }
+        return error.localizedDescription
+    }
+
+    private func isContextOverflow(_ error: Error) -> Bool {
+        if case LanguageModelSession.GenerationError.exceededContextWindowSize = error {
+            return true
+        }
+        if #available(macOS 27.0, *), case LanguageModelError.contextSizeExceeded = error {
+            return true
+        }
+        return false
+    }
+
+    private func isGuardrail(_ error: Error) -> Bool {
+        if case LanguageModelSession.GenerationError.guardrailViolation = error {
+            return true
+        }
+        if #available(macOS 27.0, *), case LanguageModelError.guardrailViolation = error {
+            return true
+        }
+        return false
     }
 
     func clear() {
@@ -165,7 +307,7 @@ final class ModelService {
 
     /// Respuesta en streaming con una sesión nueva (sin historial).
     private func stream(prompt: String) async throws {
-        let session = LanguageModelSession(instructions: instructions)
+        let session = makeSession()
         for try await partial in session.streamResponse(to: prompt) {
             response = partial.content
         }
@@ -193,19 +335,19 @@ final class ModelService {
     /// Devuelve una etiqueta de lo que se hizo, para mostrar en la interfaz.
     private func runWithFile(_ file: AttachedFile, task userTask: String,
                              mode: FileMode, typed: Bool) async throws -> String {
-        let contextSize = model.contextSize  // disponible desde macOS 26.0
+        let context = try await contextSize()
         let instructionTokens = try await tokens(instructions)
         let taskTokens = try await tokens(userTask)
         // Reserva para la plantilla del prompt, la respuesta y un margen de seguridad.
-        let budget = max(contextSize - instructionTokens - taskTokens - 1400, 600)
+        let budget = max(context - instructionTokens - taskTokens - 1400, 600)
 
-        status = "Preparando el archivo…"
+        status = String(localized: "Preparando el archivo…")
         let wholeTokens = try await tokens(file.text)
         try Task.checkCancellation()
 
         // Caso simple: todo cabe en una sola consulta.
         if wholeTokens <= budget {
-            status = "Generando…"
+            status = String(localized: "Generando…")
             try await stream(prompt: filePrompt(file.name, file.text, userTask))
             return ""
         }
@@ -223,8 +365,8 @@ final class ModelService {
                 return label
             }
             if mode == .search {
-                response = "No encontré fragmentos relacionados con tu pregunta. Prueba con otras palabras o usa «Leer todo»."
-                return "sin coincidencias"
+                response = String(localized: "No encontré fragmentos relacionados con tu pregunta. Prueba con otras palabras o usa «Leer todo».")
+                return String(localized: "sin coincidencias")
             }
             // En automático, si la búsqueda no encuentra nada, se lee todo.
         }
@@ -233,7 +375,7 @@ final class ModelService {
         try Task.checkCancellation()
 
         if chunks.count == 1 {
-            status = "Generando…"
+            status = String(localized: "Generando…")
             try await stream(prompt: filePrompt(file.name, chunks[0], userTask))
             return ""
         }
@@ -259,7 +401,7 @@ final class ModelService {
             var condensed: [String] = []
             for (index, group) in groups.enumerated() {
                 try Task.checkCancellation()
-                status = "Condensando notas (\(index + 1)/\(groups.count))…"
+                status = String(localized: "Condensando notas (\(index + 1)/\(groups.count))…")
                 condensed.append(try await condense(group, task: userTask))
             }
             notes = condensed
@@ -268,31 +410,31 @@ final class ModelService {
 
         // Respuesta final en streaming.
         try Task.checkCancellation()
-        status = "Generando respuesta final…"
+        status = String(localized: "Generando respuesta final…")
         let origin = sampled
-            ? "El archivo es muy largo: solo se leyeron \(selected.count) de \(chunks.count) partes, repartidas a lo largo del archivo (una muestra)."
-            : "El archivo se leyó completo en \(chunks.count) partes."
-        let finalPrompt = """
+            ? String(localized: "prompt.origin.sampled", defaultValue: "El archivo es muy largo: solo se leyeron \(selected.count) de \(chunks.count) partes, repartidas a lo largo del archivo (una muestra).")
+            : String(localized: "prompt.origin.full", defaultValue: "El archivo se leyó completo en \(chunks.count) partes.")
+        let finalPrompt = String(localized: "prompt.final", defaultValue: """
             A continuación hay notas de un archivo llamado «\(file.name)». \(origin)
 
             \(combined)
 
             Con base en esas notas, cumple esta tarea: \(userTask)
-            """
+            """)
         try await stream(prompt: finalPrompt)
         return sampled
-            ? "\(selected.count) de \(chunks.count) partes (muestra)"
-            : "\(chunks.count) partes"
+            ? String(localized: "\(selected.count) de \(chunks.count) partes (muestra)")
+            : String(localized: "\(chunks.count) partes")
     }
 
     private func filePrompt(_ name: String, _ body: String, _ task: String) -> String {
-        """
-        Archivo: «\(name)»
-        ---
-        \(body)
-        ---
-        Tarea: \(task)
-        """
+        String(localized: "prompt.file", defaultValue: """
+            Archivo: «\(name)»
+            ---
+            \(body)
+            ---
+            Tarea: \(task)
+            """)
     }
 
     /// Modo búsqueda: elige los fragmentos más relevantes para la pregunta y
@@ -300,7 +442,7 @@ final class ModelService {
     /// ningún fragmento coincide con la pregunta.
     private func runRetrieval(_ file: AttachedFile, question: String,
                               budget: Int) async throws -> String? {
-        status = "Buscando fragmentos relevantes…"
+        status = String(localized: "Buscando fragmentos relevantes…")
         let text = file.text
         let found = await Task.detached(priority: .userInitiated) {
             () -> (passages: [String], ranking: [Retrieval.Ranked]) in
@@ -329,9 +471,13 @@ final class ModelService {
         chosen.sort()  // orden original del documento
 
         let context = chosen
-            .map { "[Fragmento \($0 + 1) de \(passages.count)]\n\(passages[$0])" }
+            .map { index in
+                let passage = passages[index]
+                return String(localized: "prompt.fragment",
+                              defaultValue: "[Fragmento \(index + 1) de \(passages.count)]\n\(passage)")
+            }
             .joined(separator: "\n\n")
-        let prompt = """
+        let prompt = String(localized: "prompt.retrieval", defaultValue: """
             Fragmentos del archivo «\(file.name)» más relacionados con la pregunta \
             (no es el archivo completo):
 
@@ -341,10 +487,10 @@ final class ModelService {
             Pregunta: \(question)
             Responde usando solo la información de los fragmentos. Si la respuesta \
             no está en ellos, dilo claramente.
-            """
-        status = "Generando…"
+            """)
+        status = String(localized: "Generando…")
         try await stream(prompt: prompt)
-        return "búsqueda · \(chosen.count) de \(passages.count) fragmentos"
+        return String(localized: "búsqueda · \(chosen.count) de \(passages.count) fragmentos")
     }
 
     /// ¿La petición pide una visión general (resumen) en vez de una pregunta concreta?
@@ -361,7 +507,7 @@ final class ModelService {
                            name: String, task userTask: String) async throws -> [String] {
         var results = [String](repeating: "", count: indices.count)
         var done = 0
-        status = "Leyendo partes (0/\(indices.count))…"
+        status = String(localized: "Leyendo partes (\(0)/\(indices.count))…")
 
         try await withThrowingTaskGroup(of: (Int, String).self) { group in
             var next = 0
@@ -384,7 +530,7 @@ final class ModelService {
             for try await (slot, note) in group {
                 results[slot] = note
                 done += 1
-                status = "Leyendo partes (\(done)/\(indices.count))…"
+                status = String(localized: "Leyendo partes (\(done)/\(indices.count))…")
 
                 if next < indices.count {
                     let newSlot = next
@@ -404,7 +550,7 @@ final class ModelService {
         return results
     }
 
-    /// Reintenta una vez si la llamada falla (por ejemplo, por concurrencia).
+    /// Reintenta una vez si la llamada falla (por ejemplo, por concurrencia o red).
     private func extractNotesRetrying(_ text: String, index: Int, total: Int,
                                       name: String, task: String) async throws -> String {
         do {
@@ -412,8 +558,8 @@ final class ModelService {
                                           name: name, task: task)
         } catch let error as CancellationError {
             throw error
-        } catch let error as LanguageModelSession.GenerationError {
-            if case .exceededContextWindowSize = error { throw error }
+        } catch {
+            if isContextOverflow(error) { throw error }
             try await Task.sleep(for: .seconds(1))
             return try await extractNotes(text, index: index, total: total,
                                           name: name, task: task)
@@ -422,36 +568,37 @@ final class ModelService {
 
     private func extractNotes(_ text: String, index: Int, total: Int,
                               name: String, task: String) async throws -> String {
-        let session = LanguageModelSession(instructions: instructions)
-        let prompt = """
+        let session = makeSession()
+        let prompt = String(localized: "prompt.notes", defaultValue: """
             Parte \(index) de \(total) del archivo «\(name)». \
             Extrae solo la información relevante para esta tarea: \(task)
             Responde con notas muy breves (máximo 80 palabras).
             ---
             \(text)
             ---
-            """
+            """)
         do {
             let result = try await session.respond(
                 to: prompt, options: GenerationOptions(maximumResponseTokens: 220))
             return result.content
-        } catch let error as LanguageModelSession.GenerationError {
-            if case .guardrailViolation = error {
-                return "(parte omitida por el filtro de contenido del modelo)"
+        } catch {
+            if isGuardrail(error) {
+                return String(localized: "prompt.skippedPart",
+                              defaultValue: "(parte omitida por el filtro de contenido del modelo)")
             }
             throw error
         }
     }
 
     private func condense(_ notes: String, task: String) async throws -> String {
-        let session = LanguageModelSession(instructions: instructions)
-        let prompt = """
+        let session = makeSession()
+        let prompt = String(localized: "prompt.condense", defaultValue: """
             Condensa estas notas en menos de 100 palabras, conservando lo \
             relevante para esta tarea: \(task)
             ---
             \(notes)
             ---
-            """
+            """)
         let result = try await session.respond(
             to: prompt, options: GenerationOptions(maximumResponseTokens: 260))
         return result.content
@@ -459,7 +606,8 @@ final class ModelService {
 
     private func joinNotes(_ notes: [String]) -> String {
         notes.enumerated()
-            .map { "Parte \($0.offset + 1): \($0.element)" }
+            .map { String(localized: "prompt.notePart",
+                          defaultValue: "Parte \($0.offset + 1): \($0.element)") }
             .joined(separator: "\n\n")
     }
 

@@ -11,12 +11,12 @@ enum FileReaderError: LocalizedError {
         switch self {
         case .unsupported(let ext):
             return ext.isEmpty
-                ? "No puedo leer este archivo."
-                : "No puedo leer archivos .\(ext)."
+                ? String(localized: "No puedo leer este archivo.")
+                : String(localized: "No puedo leer archivos .\(ext).")
         case .empty:
-            return "No encontré texto en el archivo (¿es un PDF escaneado?)."
+            return String(localized: "No encontré texto en el archivo (¿es un PDF escaneado?).")
         case .tooLarge:
-            return "El archivo es demasiado grande (máximo 20 MB)."
+            return String(localized: "El archivo es demasiado grande (máximo 20 MB).")
         }
     }
 }

@@ -59,18 +59,31 @@ struct PromptView: View {
 
     private var placeholder: String {
         service.attachment == nil
-            ? "¿Qué necesitas?"
-            : "¿Qué hago con el archivo? (vacío = resumen)"
+            ? String(localized: "¿Qué necesitas?")
+            : String(localized: "¿Qué hago con el archivo? (vacío = resumen)")
     }
 
     private var header: some View {
         HStack(spacing: 6) {
-            Image(systemName: "sparkles").foregroundStyle(.tint)
+            Image(nsImage: MenuBarIcon.make())
+                .renderingMode(.template)
+                .foregroundStyle(.tint)
             Text("Localis").font(.headline)
-            Text("100% en tu Mac")
+            (service.usingPCC ? Text(verbatim: "Private Cloud Compute") : Text("100% en tu Mac"))
                 .font(.caption)
                 .foregroundStyle(.secondary)
             Spacer()
+            // Oculto mientras la app no esté firmada con el permiso de PCC.
+            if service.pccEntitled {
+                Toggle(isOn: pccBinding) {
+                    Label("Private Cloud Compute", systemImage: "cloud")
+                }
+                .toggleStyle(.button)
+                .labelStyle(.iconOnly)
+                .buttonStyle(.borderless)
+                .disabled(!service.pccAvailable || service.isGenerating)
+                .help(service.pccHelp)
+            }
             Button {
                 onClose()
             } label: {
@@ -86,6 +99,11 @@ struct PromptView: View {
             .buttonStyle(.borderless)
             .help("Salir de Localis")
         }
+    }
+
+    /// Se muestra apagado si PCC no está disponible, aunque la preferencia esté activa.
+    private var pccBinding: Binding<Bool> {
+        Binding(get: { service.usingPCC }, set: { service.usePCC = $0 })
     }
 
     private func attachmentRow(_ file: AttachedFile) -> some View {
@@ -140,9 +158,10 @@ struct PromptView: View {
     }
 
     private func attachmentDetail(_ file: AttachedFile) -> String {
-        let base = "\(file.characters.formatted()) caracteres"
+        let base = String(localized: "\(file.characters.formatted()) caracteres")
+        let limit = FileReader.maxCharacters.formatted()
         return file.truncated
-            ? "\(base) · truncado a \(FileReader.maxCharacters.formatted())"
+            ? String(localized: "\(base) · truncado a \(limit)")
             : base
     }
 

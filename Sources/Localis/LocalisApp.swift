@@ -22,8 +22,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         NSApp.setActivationPolicy(.accessory)  // sin ícono en el Dock
 
         let item = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
-        item.button?.image = NSImage(systemSymbolName: "sparkles",
-                                     accessibilityDescription: "Localis")
+        item.button?.image = MenuBarIcon.make()
         item.button?.target = self
         item.button?.action = #selector(togglePanel)
         statusItem = item
