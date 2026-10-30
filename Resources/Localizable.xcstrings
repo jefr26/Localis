@@ -1,0 +1,1494 @@
+{
+  "sourceLanguage": "es",
+  "strings": {
+    "%@ caracteres": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ caracteres"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ characters"
+          }
+        }
+      }
+    },
+    "%@ · truncado a %@": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ · truncado a %@"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ · truncated to %@"
+          }
+        }
+      }
+    },
+    "%lld de %lld partes (muestra)": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld de %lld partes (muestra)"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld of %lld parts (sample)"
+          }
+        }
+      }
+    },
+    "%lld partes": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld partes"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld parts"
+          }
+        }
+      }
+    },
+    "100% en tu Mac": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "100% en tu Mac"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "100% on your Mac"
+          }
+        }
+      }
+    },
+    "Activa Apple Intelligence en Ajustes del Sistema.": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Activa Apple Intelligence en Ajustes del Sistema."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Turn on Apple Intelligence in System Settings."
+          }
+        }
+      }
+    },
+    "Adjuntar": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Adjuntar"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Attach"
+          }
+        }
+      }
+    },
+    "Adjuntar archivo": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Adjuntar archivo"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Attach file"
+          }
+        }
+      }
+    },
+    "Alcanzaste el límite de uso de Private Cloud Compute hasta %@.": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alcanzaste el límite de uso de Private Cloud Compute hasta %@."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "You've reached your Private Cloud Compute usage limit until %@."
+          }
+        }
+      }
+    },
+    "Alcanzaste el límite de uso de Private Cloud Compute.": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alcanzaste el límite de uso de Private Cloud Compute."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "You've reached your Private Cloud Compute usage limit."
+          }
+        }
+      }
+    },
+    "Automático": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Automático"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Automatic"
+          }
+        }
+      }
+    },
+    "Busca los fragmentos relacionados con tu pregunta (mucho más rápido)": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Busca los fragmentos relacionados con tu pregunta (mucho más rápido)"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Searches for passages related to your question (much faster)"
+          }
+        }
+      }
+    },
+    "Buscando fragmentos relevantes…": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Buscando fragmentos relevantes…"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Searching for relevant passages…"
+          }
+        }
+      }
+    },
+    "Buscar": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Buscar"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Search"
+          }
+        }
+      }
+    },
+    "Cerrar (Esc)": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cerrar (Esc)"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Close (Esc)"
+          }
+        }
+      }
+    },
+    "Condensando notas (%lld/%lld)…": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Condensando notas (%lld/%lld)…"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Condensing notes (%lld/%lld)…"
+          }
+        }
+      }
+    },
+    "Copiar": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Copiar"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Copy"
+          }
+        }
+      }
+    },
+    "Copiar respuesta": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Copiar respuesta"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Copy answer"
+          }
+        }
+      }
+    },
+    "Corregir": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Corregir"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Proofread"
+          }
+        }
+      }
+    },
+    "Corrige la ortografía y la gramática de este texto, sin cambiar su sentido: ": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Corrige la ortografía y la gramática de este texto, sin cambiar su sentido: "
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fix the spelling and grammar of this text without changing its meaning: "
+          }
+        }
+      }
+    },
+    "Datos clave": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Datos clave"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Key facts"
+          }
+        }
+      }
+    },
+    "Demasiadas solicitudes seguidas. Espera un momento e inténtalo de nuevo.": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Demasiadas solicitudes seguidas. Espera un momento e inténtalo de nuevo."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Too many requests in a row. Wait a moment and try again."
+          }
+        }
+      }
+    },
+    "Detener": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Detener"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stop"
+          }
+        }
+      }
+    },
+    "El archivo es demasiado grande (máximo 20 MB).": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El archivo es demasiado grande (máximo 20 MB)."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The file is too large (20 MB max)."
+          }
+        }
+      }
+    },
+    "El modelo aún se está descargando. Inténtalo en unos minutos.": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El modelo aún se está descargando. Inténtalo en unos minutos."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The model is still downloading. Try again in a few minutes."
+          }
+        }
+      }
+    },
+    "El modelo no está disponible.": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El modelo no está disponible."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The model isn't available."
+          }
+        }
+      }
+    },
+    "El modelo no puede responder a esta petición.": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El modelo no puede responder a esta petición."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The model can't respond to this request."
+          }
+        }
+      }
+    },
+    "El texto es demasiado largo para el modelo (límite de contexto).": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El texto es demasiado largo para el modelo (límite de contexto)."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The text is too long for the model (context limit)."
+          }
+        }
+      }
+    },
+    "Enviar": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Enviar"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Send"
+          }
+        }
+      }
+    },
+    "Esta copia de Localis no tiene el permiso de Private Cloud Compute. Compílala firmada con tu cuenta de desarrollador (ver build_app.sh).": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Esta copia de Localis no tiene el permiso de Private Cloud Compute. Compílala firmada con tu cuenta de desarrollador (ver build_app.sh)."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "This copy of Localis doesn't have the Private Cloud Compute entitlement. Build it signed with your developer account (see build_app.sh)."
+          }
+        }
+      }
+    },
+    "Este Mac no es compatible con Apple Intelligence.": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Este Mac no es compatible con Apple Intelligence."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "This Mac doesn't support Apple Intelligence."
+          }
+        }
+      }
+    },
+    "Este Mac no es compatible con Private Cloud Compute.": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Este Mac no es compatible con Private Cloud Compute."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "This Mac doesn't support Private Cloud Compute."
+          }
+        }
+      }
+    },
+    "Este archivo es código. Explica qué hace, señala posibles errores y sugiere mejoras de legibilidad.": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Este archivo es código. Explica qué hace, señala posibles errores y sugiere mejoras de legibilidad."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "This file is code. Explain what it does, point out possible bugs and suggest readability improvements."
+          }
+        }
+      }
+    },
+    "Explica con palabras simples: ": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Explica con palabras simples: "
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Explain in simple words: "
+          }
+        }
+      }
+    },
+    "Explica el contenido con palabras simples, como si se lo contaras a alguien sin conocimientos del tema.": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Explica el contenido con palabras simples, como si se lo contaras a alguien sin conocimientos del tema."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Explain the content in simple words, as if you were telling someone with no background in the subject."
+          }
+        }
+      }
+    },
+    "Explicar": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Explicar"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Explain"
+          }
+        }
+      }
+    },
+    "Explicar fácil": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Explicar fácil"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Explain simply"
+          }
+        }
+      }
+    },
+    "Extrae las fechas, nombres, cifras y montos más importantes, en una lista.": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Extrae las fechas, nombres, cifras y montos más importantes, en una lista."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Extract the most important dates, names, figures and amounts as a list."
+          }
+        }
+      }
+    },
+    "Generando respuesta final…": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Generando respuesta final…"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Generating final answer…"
+          }
+        }
+      }
+    },
+    "Generando…": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Generando…"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Generating…"
+          }
+        }
+      }
+    },
+    "Haz un resumen claro y breve del contenido.": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Haz un resumen claro y breve del contenido."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Write a clear, brief summary of the content."
+          }
+        }
+      }
+    },
+    "La respuesta aparecerá aquí. Puedes arrastrar un archivo desde Finder.": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La respuesta aparecerá aquí. Puedes arrastrar un archivo desde Finder."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The answer will appear here. You can drag a file from Finder."
+          }
+        }
+      }
+    },
+    "Lee el archivo completo por partes (más lento, cubre todo)": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lee el archivo completo por partes (más lento, cubre todo)"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reads the whole file in parts (slower, covers everything)"
+          }
+        }
+      }
+    },
+    "Leer todo": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Leer todo"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Read all"
+          }
+        }
+      }
+    },
+    "Leyendo partes (%lld/%lld)…": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Leyendo partes (%lld/%lld)…"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reading parts (%lld/%lld)…"
+          }
+        }
+      }
+    },
+    "Limpiar": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Limpiar"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Clear"
+          }
+        }
+      }
+    },
+    "Limpiar todo": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Limpiar todo"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Clear all"
+          }
+        }
+      }
+    },
+    "Lista los 5 a 7 puntos clave del contenido, en viñetas cortas.": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lista los 5 a 7 puntos clave del contenido, en viñetas cortas."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "List the 5 to 7 key points of the content as short bullets."
+          }
+        }
+      }
+    },
+    "Modo": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modo"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mode"
+          }
+        }
+      }
+    },
+    "Modo rápido": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modo rápido"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fast mode"
+          }
+        }
+      }
+    },
+    "Modo rápido: en archivos largos lee solo una muestra de 4 partes": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modo rápido: en archivos largos lee solo una muestra de 4 partes"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fast mode: on long files, reads only a sample of 4 parts"
+          }
+        }
+      }
+    },
+    "No encontré fragmentos relacionados con tu pregunta. Prueba con otras palabras o usa «Leer todo».": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No encontré fragmentos relacionados con tu pregunta. Prueba con otras palabras o usa «Leer todo»."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "I couldn't find passages related to your question. Try other words or use “Read all”."
+          }
+        }
+      }
+    },
+    "No encontré texto en el archivo (¿es un PDF escaneado?).": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No encontré texto en el archivo (¿es un PDF escaneado?)."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "I didn't find any text in the file (is it a scanned PDF?)."
+          }
+        }
+      }
+    },
+    "No hay conexión con Private Cloud Compute. Revisa tu red o desactiva PCC.": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No hay conexión con Private Cloud Compute. Revisa tu red o desactiva PCC."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Can't connect to Private Cloud Compute. Check your network or turn off PCC."
+          }
+        }
+      }
+    },
+    "No puedo leer archivos .%@.": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No puedo leer archivos .%@."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "I can't read .%@ files."
+          }
+        }
+      }
+    },
+    "No puedo leer este archivo.": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No puedo leer este archivo."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "I can't read this file."
+          }
+        }
+      }
+    },
+    "Preparando el archivo…": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Preparando el archivo…"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Preparing the file…"
+          }
+        }
+      }
+    },
+    "Private Cloud Compute": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Private Cloud Compute"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Private Cloud Compute"
+          }
+        }
+      }
+    },
+    "Private Cloud Compute aún no está listo. Revisa Apple Intelligence en Ajustes del Sistema.": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Private Cloud Compute aún no está listo. Revisa Apple Intelligence en Ajustes del Sistema."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Private Cloud Compute isn't ready yet. Check Apple Intelligence in System Settings."
+          }
+        }
+      }
+    },
+    "Private Cloud Compute no está disponible en este momento. Inténtalo más tarde o desactiva PCC.": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Private Cloud Compute no está disponible en este momento. Inténtalo más tarde o desactiva PCC."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Private Cloud Compute isn't available right now. Try again later or turn off PCC."
+          }
+        }
+      }
+    },
+    "Private Cloud Compute no está disponible.": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Private Cloud Compute no está disponible."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Private Cloud Compute isn't available."
+          }
+        }
+      }
+    },
+    "Private Cloud Compute requiere macOS 27 o posterior.": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Private Cloud Compute requiere macOS 27 o posterior."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Private Cloud Compute requires macOS 27 or later."
+          }
+        }
+      }
+    },
+    "Puntos clave": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Puntos clave"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Key points"
+          }
+        }
+      }
+    },
+    "Quitar archivo": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quitar archivo"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Remove file"
+          }
+        }
+      }
+    },
+    "Redacta un correo breve y profesional sobre: ": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Redacta un correo breve y profesional sobre: "
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Write a short, professional email about: "
+          }
+        }
+      }
+    },
+    "Redactar correo": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Redactar correo"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Write email"
+          }
+        }
+      }
+    },
+    "Resumir": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Resumir"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Summarize"
+          }
+        }
+      }
+    },
+    "Resúmenes y plantillas leen todo; las preguntas concretas buscan los fragmentos relevantes": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Resúmenes y plantillas leen todo; las preguntas concretas buscan los fragmentos relevantes"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Summaries and templates read everything; specific questions search for the relevant passages"
+          }
+        }
+      }
+    },
+    "Revisar código": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Revisar código"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Review code"
+          }
+        }
+      }
+    },
+    "Salir de Localis": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Salir de Localis"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quit Localis"
+          }
+        }
+      }
+    },
+    "Suelta el archivo aquí": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Suelta el archivo aquí"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Drop the file here"
+          }
+        }
+      }
+    },
+    "Traduce al español: ": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Traduce al español: "
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Translate into Spanish: "
+          }
+        }
+      }
+    },
+    "Traduce al inglés: ": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Traduce al inglés: "
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Translate into English: "
+          }
+        }
+      }
+    },
+    "Traducir al español": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Traducir al español"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Translate to Spanish"
+          }
+        }
+      }
+    },
+    "Traducir al inglés": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Traducir al inglés"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Translate to English"
+          }
+        }
+      }
+    },
+    "Usando Private Cloud Compute (modelo más grande en servidores de Apple)": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Usando Private Cloud Compute (modelo más grande en servidores de Apple)"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Using Private Cloud Compute (larger model on Apple servers)"
+          }
+        }
+      }
+    },
+    "Usar Private Cloud Compute (modelo más grande en servidores de Apple)": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Usar Private Cloud Compute (modelo más grande en servidores de Apple)"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Use Private Cloud Compute (larger model on Apple servers)"
+          }
+        }
+      }
+    },
+    "búsqueda · %lld de %lld fragmentos": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "búsqueda · %lld de %lld fragmentos"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "search · %lld of %lld passages"
+          }
+        }
+      }
+    },
+    "prompt.condense": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Condensa estas notas en menos de 100 palabras, conservando lo relevante para esta tarea: %@\n---\n%@\n---"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Condense these notes into fewer than 100 words, keeping what's relevant to this task: %@\n---\n%@\n---"
+          }
+        }
+      }
+    },
+    "prompt.defaultTask": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Haz un resumen claro y breve del contenido."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Write a clear, brief summary of the content."
+          }
+        }
+      }
+    },
+    "prompt.file": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Archivo: «%@»\n---\n%@\n---\nTarea: %@"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "File: “%@”\n---\n%@\n---\nTask: %@"
+          }
+        }
+      }
+    },
+    "prompt.final": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A continuación hay notas de un archivo llamado «%@». %@\n\n%@\n\nCon base en esas notas, cumple esta tarea: %@"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Below are notes from a file named “%@”. %@\n\n%@\n\nBased on these notes, complete this task: %@"
+          }
+        }
+      }
+    },
+    "prompt.fragment": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "[Fragmento %lld de %lld]\n%@"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "[Passage %lld of %lld]\n%@"
+          }
+        }
+      }
+    },
+    "prompt.instructions": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eres Localis, un asistente en el Mac del usuario. Responde en el idioma en que está escrita la petición del usuario, de forma clara y breve."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "You are Localis, an assistant on the user's Mac. Reply in the language the user's request is written in, clearly and concisely."
+          }
+        }
+      }
+    },
+    "prompt.notePart": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Parte %lld: %@"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Part %lld: %@"
+          }
+        }
+      }
+    },
+    "prompt.notes": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Parte %lld de %lld del archivo «%@». Extrae solo la información relevante para esta tarea: %@\nResponde con notas muy breves (máximo 80 palabras).\n---\n%@\n---"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Part %lld of %lld of the file “%@”. Extract only the information relevant to this task: %@\nReply with very short notes (80 words max).\n---\n%@\n---"
+          }
+        }
+      }
+    },
+    "prompt.origin.full": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El archivo se leyó completo en %lld partes."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The whole file was read in %lld parts."
+          }
+        }
+      }
+    },
+    "prompt.origin.sampled": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El archivo es muy largo: solo se leyeron %lld de %lld partes, repartidas a lo largo del archivo (una muestra)."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The file is very long: only %lld of %lld parts were read, spread across the file (a sample)."
+          }
+        }
+      }
+    },
+    "prompt.retrieval": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fragmentos del archivo «%@» más relacionados con la pregunta (no es el archivo completo):\n\n%@\n\n---\nPregunta: %@\nResponde usando solo la información de los fragmentos. Si la respuesta no está en ellos, dilo claramente."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Passages from the file “%@” most related to the question (not the whole file):\n\n%@\n\n---\nQuestion: %@\nAnswer using only the information in the passages. If the answer isn't in them, say so clearly."
+          }
+        }
+      }
+    },
+    "prompt.skippedPart": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "(parte omitida por el filtro de contenido del modelo)"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "(part skipped by the model's content filter)"
+          }
+        }
+      }
+    },
+    "sin coincidencias": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "sin coincidencias"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "no matches"
+          }
+        }
+      }
+    },
+    "¿Qué hago con el archivo? (vacío = resumen)": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¿Qué hago con el archivo? (vacío = resumen)"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "What should I do with the file? (empty = summary)"
+          }
+        }
+      }
+    },
+    "¿Qué necesitas?": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¿Qué necesitas?"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "What do you need?"
+          }
+        }
+      }
+    }
+  },
+  "version": "1.0"
+}
