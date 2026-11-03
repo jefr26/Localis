@@ -1,0 +1,47 @@
+name: CodeQL
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  schedule:
+    - cron: "27 6 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  security-events: write
+  actions: read
+
+jobs:
+  analyze:
+    name: Analyze (${{ matrix.language }})
+    # Swift must be compiled against the macOS 27 SDK (PrivateCloudComputeLanguageModel,
+    # LanguageModelError…), so it uses the same Xcode 27 image as release.yml.
+    runs-on: ${{ matrix.runner }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - language: swift
+            build-mode: manual
+            runner: xcode-27
+          - language: actions
+            build-mode: none
+            runner: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: github/codeql-action/init@v3
+        with:
+          languages: ${{ matrix.language }}
+          build-mode: ${{ matrix.build-mode }}
+
+      - name: Build
+        if: matrix.build-mode == 'manual'
+        run: swift build -c release --arch arm64
+
+      - uses: github/codeql-action/analyze@v3
+        with:
+          category: "/language:${{ matrix.language }}"
